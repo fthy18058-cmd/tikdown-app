@@ -3,509 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikDown Studio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>TikDown Pro</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='108' fill='%230f111a'/><path d='M256 160 V310 M190 254 L256 320 L322 254 M160 360 H352' stroke='%23fe2c55' stroke-width='32' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
     <style>
         :root {
-            --bg-main: #090a0f;
-            --card-bg: #12151e;
-            --input-bg: #1a1e2b;
-            --accent-pink: #fe2c55;
-            --accent-cyan: #25f4ee;
-            --text-main: #ffffff;
-            --text-muted: #8a8f9d;
-            --border: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Light Theme Modifiers */
-        body.light-theme {
-            --bg-main: #f4f5f9;
-            --card-bg: #ffffff;
-            --input-bg: #eef0f5;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --border: rgba(0, 0, 0, 0.08);
+            --bg-color: #0f111a;
+            --card-bg: #16192b;
+            --primary-pink: #fe2c55;
+            --primary-cyan: #25f4ee;
+            --text-color: #ffffff;
+            --text-secondary: #a0a5b5;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        header {
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 15px 15px 90px 15px; /* Space for Bottom Nav */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 24px 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        /* Top Header */
-        .header {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: rgba(22, 25, 43, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
+        .logo-title {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        .logo span { color: var(--accent-pink); }
-
-        /* Navigation Sections */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        .logo-title span {
+            color: var(--primary-pink);
         }
 
-        /* Input Controls */
-        .input-wrapper {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
-        .input-wrapper input {
+        .container {
             width: 100%;
-            padding: 16px 80px 16px 16px;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            color: var(--text-main);
-            font-size: 13px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .input-box {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        .input-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
             outline: none;
+            color: #fff;
+            padding: 10px;
+            font-size: 0.95rem;
+            direction: ltr;
+        }
+
+        .btn-fetch {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-pink), #ff0050);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4);
+            margin-bottom: 25px;
             transition: 0.2s;
         }
 
-        .input-wrapper input:focus { border-color: var(--accent-pink); }
-
-        .input-actions {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 6px;
+        .btn-fetch:active {
+            transform: scale(0.98);
         }
 
-        .icon-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 6px;
-            font-size: 14px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent-pink);
-            color: #fff;
-            border: none;
+        .result-card {
+            display: none;
+            background: var(--card-bg);
             border-radius: 16px;
-            font-size: 15px;
-            font-weight: 700;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-cyan);
+        }
+
+        .user-details h4 {
+            font-size: 0.95rem;
+        }
+
+        .user-details p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .media-preview {
+            width: 100%;
+            max-height: 380px;
+            border-radius: 12px;
+            background: #000;
+            object-fit: contain;
+        }
+
+        .btn-download {
+            background: #17af9b;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
+            font-size: 0.95rem;
         }
 
-        /* Loader & Results */
-        .loader-box { display: none; text-align: center; padding: 20px 0; }
-        .spinner {
-            width: 30px; height: 30px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid var(--accent-pink);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 10px;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .result-box { display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
-        .user-profile { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-        .user-profile img { width: 38px; height: 38px; border-radius: 50%; }
-        .video-player { width: 100%; max-height: 360px; border-radius: 16px; background: #000; margin-bottom: 12px; }
-
-        .dl-button {
-            width: 100%; padding: 14px; border-radius: 14px; border: none;
-            font-size: 13px; font-weight: 700; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            margin-bottom: 8px;
-        }
-        .dl-primary { background: var(--accent-cyan); color: #000; }
-        .dl-secondary { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border); }
-
-        /* History & Storage Items */
-        .history-card {
-            display: flex; align-items: center; gap: 10px;
-            background: var(--input-bg); padding: 12px;
-            border-radius: 14px; margin-bottom: 8px;
-        }
-        .history-card img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; }
-
-        .btn-danger {
-            width: 100%; background: rgba(254, 44, 85, 0.1); color: var(--accent-pink);
-            border: 1px solid rgba(254, 44, 85, 0.3); padding: 12px;
-            border-radius: 14px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 10px;
+        .btn-audio {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
         }
 
-        /* Settings Options */
-        .setting-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 14px 0; border-bottom: 1px solid var(--border);
-        }
-        .setting-label { font-size: 13px; font-weight: 600; }
-        .setting-desc { font-size: 11px; color: var(--text-muted); }
-
-        .select-custom {
-            background: var(--input-bg); color: var(--text-main);
-            border: 1px solid var(--border); padding: 6px 12px;
-            border-radius: 10px; font-size: 12px; outline: none;
+        .status-msg {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--primary-cyan);
+            margin-top: 5px;
+            display: none;
         }
 
-        /* Toggle Switch */
-        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; inset: 0;
-            background-color: var(--input-bg); border: 1px solid var(--border);
-            transition: .3s; border-radius: 24px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px;
-            left: 3px; bottom: 3px; background-color: var(--text-muted);
-            transition: .3s; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--accent-pink); }
-        input:checked + .slider:before { transform: translateX(20px); background-color: #fff; }
-
-        /* Bottom Nav Bar */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--card-bg); border-top: 1px solid var(--border);
-            display: flex; justify-content: space-around; padding: 10px 0;
-            max-width: 480px; margin: 0 auto; z-index: 100;
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .nav-item {
-            background: none; border: none; color: var(--text-muted);
-            display: flex; flex-direction: column; align-items: center;
-            gap: 4px; font-size: 11px; font-weight: 600; cursor: pointer;
-            transition: 0.2s; flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-decoration: none;
         }
 
-        .nav-item i { font-size: 18px; }
-        .nav-item.active { color: var(--accent-pink); }
-
-        /* Footer Stamp */
-        .footer-stamp {
-            margin-top: 25px; text-align: center; font-size: 11px;
-            color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px;
+        .nav-item.active {
+            color: var(--primary-pink);
         }
-        .footer-stamp strong { color: var(--accent-pink); }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    
-    <!-- Top Header -->
-    <div class="header">
-        <div class="logo">
-            <i class="fa-brands fa-tiktok"></i> TikDown <span>Pro</span>
+    <header>
+        <div class="logo-title">
+            <span>⚡ Pro</span> TikDown
         </div>
-    </div>
+    </header>
 
-    <!-- 1. TAB: HOME (الرئيسية) -->
-    <div id="tabHome" class="tab-content active">
-        <div class="input-wrapper">
-            <input type="text" id="urlInput" placeholder="ضع رابط التيك توك هنا...">
-            <div class="input-actions">
-                <button class="icon-btn" onclick="clearInput()" title="مسح النص"><i class="fa-solid fa-xmark"></i></button>
-                <button class="icon-btn" onclick="pasteFromClipboard()" title="لصق"><i class="fa-solid fa-paste"></i></button>
-            </div>
+    <div class="container">
+        <div class="input-box">
+            <input type="text" id="videoUrl" placeholder="ضع رابط فيديو التيك توك هنا..." />
         </div>
 
-        <button class="btn-submit" onclick="fetchTikTokMedia()">
-            <i class="fa-solid fa-bolt"></i> جلب الميديا
-        </button>
+        <button class="btn-fetch" onclick="fetchMedia()">⚡ جلب الميديا</button>
+        <div class="status-msg" id="statusMsg">جاري معالجة الفيديو والتحميل المباشر...</div>
 
-        <div class="loader-box" id="loader">
-            <div class="spinner"></div>
-            <p style="font-size: 12px; color: var(--text-muted);">جاري المعالجة...</p>
-        </div>
-
-        <div class="result-box" id="resultBox">
-            <div class="user-profile">
-                <img id="userAvatar" src="" alt="Avatar">
-                <div>
-                    <strong id="userName"></strong>
-                    <span id="videoTitle" style="font-size:11px; color:var(--text-muted);"></span>
+        <div class="result-card" id="resultCard">
+            <div class="user-info">
+                <img id="userAvatar" class="user-avatar" src="" alt="avatar">
+                <div class="user-details">
+                    <h4 id="username">@user</h4>
+                    <p id="videoDesc">وصف الفيديو...</p>
                 </div>
             </div>
-            <div id="mediaContainer"></div>
-            <div id="actionButtons"></div>
-            <div id="dlStatus" style="font-size:11px; color:var(--accent-cyan); text-align:center; margin-top:8px; display:none;">⚡ جاري التنزيل وحفظ الملف...</div>
+
+            <video id="videoPreview" class="media-preview" controls></video>
+
+            <button class="btn-download" onclick="triggerDirectDownload('video')">
+                📥 تحميل الفيديو بدون علامة مائية
+            </button>
+            <button class="btn-audio" onclick="triggerDirectDownload('audio')">
+                🎵 تحميل الصوت MP3
+            </button>
         </div>
     </div>
 
-    <!-- 2. TAB: STORAGE (المخزون) -->
-    <div id="tabStorage" class="tab-content">
-        <h4 style="font-size: 14px; margin-bottom: 12px;"><i class="fa-solid fa-box-archive" style="color:var(--accent-cyan)"></i> مخزون التحميلات</h4>
-        <div id="storageList"></div>
-        <button class="btn-danger" onclick="clearAllHistory()"><i class="fa-solid fa-trash"></i> مسح سجل المخزون بالكامل</button>
-    </div>
+    <nav>
+        <a href="#" class="nav-item active">🏠<span>الرئيسية</span></a>
+        <a href="#" class="nav-item">📦<span>المخزون</span></a>
+        <a href="#" class="nav-item">⚙️<span>الإعدادات</span></a>
+    </nav>
 
-    <!-- 3. TAB: SETTINGS (الإعدادات) -->
-    <div id="tabSettings" class="tab-content">
-        <h4 style="font-size: 14px; margin-bottom: 15px;"><i class="fa-solid fa-sliders" style="color:var(--accent-pink)"></i> إعدادات التطبيق</h4>
-        
-        <div class="setting-item">
-            <div>
-                <div class="setting-label">الوضع الداكن (Dark Mode)</div>
-                <div class="setting-desc">تغيير مظهر التطبيق</div>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
-                <span class="slider"></span>
-            </label>
-        </div>
+    <script>
+        let currentVideoData = null;
 
-        <div class="setting-item">
-            <div>
-                <div class="setting-label">جودة التحميل الافتراضية</div>
-                <div class="setting-desc">تحديد الجودة عند الجلب</div>
-            </div>
-            <select class="select-custom">
-                <option value="hd">أعلى جودة (HD)</option>
-                <option value="sd">جودة عادية (توفير الباقة)</option>
-            </select>
-        </div>
+        async function fetchMedia() {
+            const urlInput = document.getElementById('videoUrl').value.trim();
+            const statusMsg = document.getElementById('statusMsg');
+            const resultCard = document.getElementById('resultCard');
 
-        <div class="setting-item">
-            <div>
-                <div class="setting-label">مسح التخزين المؤقت</div>
-                <div class="setting-desc">تنظيف ذاكرة التطبيق لتوفير المساحة</div>
-            </div>
-            <button onclick="clearCache()" style="background:var(--input-bg); color:var(--text-main); border:1px solid var(--border); padding:6px 12px; border-radius:10px; font-size:12px; cursor:pointer;">تنظيف</button>
-        </div>
+            if (!urlInput) {
+                alert('الرجاء كتابة أو لصق رابط الفيديو أولاً!');
+                return;
+            }
 
-        <div class="footer-stamp" style="margin-top: 15px;">
-            تطبيق TikDown Pro v2.0
-            <br>
-            تطوير وبرمجة: <strong>محمد فتحي ⚡</strong>
-        </div>
-    </div>
+            statusMsg.style.display = 'block';
+            statusMsg.innerText = 'جاري التحقق من الفيديو...';
+            resultCard.style.display = 'none';
 
-</div>
+            try {
+                // استخدام API مجاني ومعتمد لتحليل روابط تيك توك
+                const apiRes = await fetch(`https://api.tiklydown.eu.org/api/download?url=${encodeURIComponent(urlInput)}`);
+                const data = await apiRes.json();
 
-<!-- Bottom Navigation Bar -->
-<div class="bottom-nav">
-    <button class="nav-item active" onclick="switchTab('Home', this)">
-        <i class="fa-solid fa-house"></i>
-        <span>الرئيسية</span>
-    </button>
-    <button class="nav-item" onclick="switchTab('Storage', this)">
-        <i class="fa-solid fa-box-archive"></i>
-        <span>المخزون (<span id="storageBadge">0</span>)</span>
-    </button>
-    <button class="nav-item" onclick="switchTab('Settings', this)">
-        <i class="fa-solid fa-gear"></i>
-        <span>الإعدادات</span>
-    </button>
-</div>
+                if (data && data.video) {
+                    currentVideoData = data;
 
-<script>
-    let historyData = JSON.parse(localStorage.getItem('tikdown_pro_history')) || [];
-    updateStorageBadge();
+                    // عرض التاصيل
+                    document.getElementById('username').innerText = `@${data.author?.unique_id || 'tiktok_user'}`;
+                    document.getElementById('videoDesc').innerText = data.title || '';
+                    document.getElementById('userAvatar').src = data.author?.avatar || '';
+                    
+                    const videoElem = document.getElementById('videoPreview');
+                    videoElem.src = data.video.noWatermark || data.video.watermark;
 
-    // التنقل بين الأقسام (Tabs Navigation)
-    function switchTab(tabName, btn) {
-        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-
-        document.getElementById(`tab${tabName}`).classList.add('active');
-        btn.classList.add('active');
-
-        if (tabName === 'Storage') renderStorage();
-    }
-
-    function clearInput() { document.getElementById('urlInput').value = ''; }
-
-    async function pasteFromClipboard() {
-        try {
-            const text = await navigator.clipboard.readText();
-            document.getElementById('urlInput').value = text;
-        } catch (err) { alert("يرجى السماح بصلاحية اللصق!"); }
-    }
-
-    async function fetchTikTokMedia() {
-        let rawUrl = document.getElementById('urlInput').value.trim();
-        const loader = document.getElementById('loader');
-        const resultBox = document.getElementById('resultBox');
-        const mediaContainer = document.getElementById('mediaContainer');
-        const actionButtons = document.getElementById('actionButtons');
-
-        if (!rawUrl) { alert("يرجى إدخال الرابط أولاً!"); return; }
-
-        const match = rawUrl.match(/https?:\/\/[^\s]+/);
-        const url = match ? match[0] : rawUrl;
-
-        loader.style.display = "block";
-        resultBox.style.display = "none";
-        mediaContainer.innerHTML = "";
-        actionButtons.innerHTML = "";
-
-        try {
-            const response = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`);
-            const res = await response.json();
-
-            loader.style.display = "none";
-
-            if (res.code === 0) {
-                const data = res.data;
-                document.getElementById('userAvatar').src = data.author.avatar;
-                document.getElementById('userName').innerText = "@" + data.author.unique_id;
-                document.getElementById('videoTitle').innerText = data.title || "فيديو تيك توك";
-
-                if (!data.images || data.images.length === 0) {
-                    mediaContainer.innerHTML = `
-                        <video class="video-player" controls poster="${data.cover}">
-                            <source src="${data.play}" type="video/mp4">
-                        </video>`;
-
-                    actionButtons.innerHTML = `
-                        <button onclick="downloadFile('${data.play}', 'video', '${data.cover}', '${(data.title || 'فيديو').replace(/'/g, "")}')" class="dl-button dl-primary">
-                            <i class="fa-solid fa-download"></i> تحميل الفيديو بدون علامة مائية
-                        </button>
-                        <button onclick="downloadFile('${data.music}', 'audio', '${data.author.avatar}', 'صوت: ${(data.title || 'تيك توك').replace(/'/g, "")}')" class="dl-button dl-secondary">
-                            <i class="fa-solid fa-music"></i> تحميل الصوت MP3
-                        </button>`;
+                    resultCard.style.display = 'flex';
+                    statusMsg.style.display = 'none';
                 } else {
-                    let gridHTML = '<div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; margin-bottom:12px;">';
-                    data.images.forEach((img, idx) => {
-                        gridHTML += `
-                            <div style="background:var(--input-bg); padding:6px; border-radius:10px; text-align:center;">
-                                <img src="${img}" style="width:100%; height:110px; object-fit:cover; border-radius:8px;">
-                                <button onclick="downloadFile('${img}', 'photo', '${img}', 'صورة ${idx+1}')" class="dl-button dl-secondary" style="font-size:10px; padding:6px; margin-top:6px;">
-                                    تنزيل صورة ${idx+1}
-                                </button>
-                            </div>`;
-                    });
-                    gridHTML += '</div>';
-                    mediaContainer.innerHTML = gridHTML;
+                    throw new Error('لم يتم العثور على ميديا في هذا الرابط');
                 }
-                resultBox.style.display = "block";
-            } else { alert("تعذر جلب الميديا، تأكد من صحة الرابط!"); }
-        } catch (err) {
-            loader.style.display = "none";
-            alert("حدث خطأ في الاتصال بالشبكة!");
-        }
-    }
-
-    async function downloadFile(fileUrl, type, cover, title) {
-        const status = document.getElementById('dlStatus');
-        status.style.display = "block";
-
-        const fileName = `TikDown_${Date.now()}.${type === 'video' ? 'mp4' : (type === 'audio' ? 'mp3' : 'jpeg')}`;
-
-        try {
-            const response = await fetch(fileUrl);
-            const blob = await response.blob();
-            const blobUrl = window.URL.createObjectURL(blob);
-
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
-            saveToHistory(title, cover, fileUrl);
-            status.innerText = "✅ تم الحفظ بنجاح!";
-            setTimeout(() => { status.style.display = "none"; }, 2500);
-        } catch (error) {
-            window.open(fileUrl, '_blank');
-            saveToHistory(title, cover, fileUrl);
-            status.style.display = "none";
-        }
-    }
-
-    // المخزون (Storage Functions)
-    function saveToHistory(title, img, url) {
-        historyData.unshift({ id: Date.now(), title: title || 'ملف ميديا', img: img || '', url: url });
-        localStorage.setItem('tikdown_pro_history', JSON.stringify(historyData));
-        updateStorageBadge();
-    }
-
-    function updateStorageBadge() {
-        document.getElementById('storageBadge').innerText = historyData.length;
-    }
-
-    function renderStorage() {
-        const list = document.getElementById('storageList');
-        if (historyData.length === 0) {
-            list.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px 0; font-size:12px;">المخزون فارغ حالياً 📭</p>';
-            return;
+            } catch (err) {
+                alert('حدث خطأ أثناء جلب الفيديو. تأكد من صحة الرابط!');
+                statusMsg.style.display = 'none';
+            }
         }
 
-        list.innerHTML = historyData.map(item => `
-            <div class="history-card">
-                <img src="${item.img}" alt="thumb">
-                <div style="flex:1; overflow:hidden;">
-                    <strong style="font-size:12px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.title}</strong>
-                </div>
-                <a href="${item.url}" target="_blank" download style="color:var(--accent-cyan); font-size:16px;"><i class="fa-solid fa-download"></i></a>
-            </div>
-        `).join('');
-    }
+        // كود التحميل المباشر لمنع ظهور رسالة Save As المزعجة
+        async function triggerDirectDownload(type) {
+            if (!currentVideoData) return;
 
-    function clearAllHistory() {
-        if (confirm("هل تريد مسح كل مخزون التحميلات؟")) {
-            historyData = [];
-            localStorage.removeItem('tikdown_pro_history');
-            renderStorage();
-            updateStorageBadge();
+            const statusMsg = document.getElementById('statusMsg');
+            statusMsg.style.display = 'block';
+            statusMsg.innerText = 'جاري التنزيل المباشر إلى ذاكرة الهاتف...';
+
+            let targetUrl = '';
+            let filename = '';
+
+            if (type === 'video') {
+                targetUrl = currentVideoData.video.noWatermark || currentVideoData.video.watermark;
+                filename = `TikDown_${Date.now()}.mp4`;
+            } else {
+                targetUrl = currentVideoData.music.play_url;
+                filename = `TikDown_Audio_${Date.now()}.mp3`;
+            }
+
+            try {
+                // جلب الملف برمجياً كـ Blob لتجاوز نافذة WebView المزعجة
+                const res = await fetch(targetUrl);
+                const blob = await res.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+
+                setTimeout(() => {
+                    URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(a);
+                    statusMsg.innerText = 'تم التنزيل بنجاح إلى مجلد Downloads!';
+                }, 1000);
+
+            } catch (error) {
+                // حل بديل في حال وجود قيود CORS من السيرفر
+                window.location.href = targetUrl;
+                statusMsg.style.display = 'none';
+            }
         }
-    }
-
-    // الإعدادات (Settings Functions)
-    function toggleTheme() {
-        document.body.classList.toggle('light-theme');
-    }
-
-    function clearCache() {
-        alert("تم تنظيف التخزين المؤقت بنجاح! 🧹");
-    }
-</script>
-
+    </script>
 </body>
 </html>
+
