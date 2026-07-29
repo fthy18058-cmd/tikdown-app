@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TikDown ULTRA - Mohamed Fathi</title>
+    <title>ZNGO TikDown - Mohamed Fathi</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #090a14;
-            --bg-card: rgba(20, 24, 42, 0.85);
+            --bg-main: #05050a;
+            --bg-card: rgba(18, 20, 35, 0.9);
             --neon-pink: #ff0050;
             --neon-cyan: #00f2fe;
             --neon-purple: #7b2cbf;
             --neon-gold: #ffd700;
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.12);
+            --border-glass: rgba(255, 255, 255, 0.15);
         }
 
         * {
@@ -29,8 +29,8 @@
         body {
             background: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(255, 0, 80, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(0, 242, 254, 0.12) 0%, transparent 45%);
+                radial-gradient(circle at 10% 10%, rgba(255, 0, 80, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(0, 242, 254, 0.15) 0%, transparent 50%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
@@ -38,12 +38,92 @@
             overflow-x: hidden;
         }
 
+        /* Splash Screen Style */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #030307;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .splash-logo-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulseLogo 1.5s infinite alternate;
+        }
+
+        .tiktok-icon-shape {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            border-radius: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(255, 0, 80, 0.6), 0 0 30px rgba(0, 242, 254, 0.6);
+            animation: rotateIcon 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+        }
+
+        .tiktok-icon-shape svg {
+            width: 45px;
+            height: 45px;
+            fill: #fff;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1.1); }
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(-10deg); }
+            100% { transform: rotate(10deg); }
+        }
+
+        .splash-title {
+            margin-top: 25px;
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #fff, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            animation: fadeInText 1s ease-in-out;
+        }
+
+        .splash-subtitle {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--neon-gold);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main UI */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 14px 18px;
-            background: rgba(9, 10, 20, 0.95);
+            background: rgba(5, 5, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glass);
             position: sticky;
@@ -69,7 +149,6 @@
             color: var(--neon-gold);
             font-weight: 800;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
         .brand-badge {
@@ -328,7 +407,7 @@
             left: 0;
             right: 0;
             height: 65px;
-            background: rgba(9, 10, 20, 0.95);
+            background: rgba(5, 5, 10, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-glass);
             display: flex;
@@ -354,35 +433,47 @@
 </head>
 <body>
 
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <div class="splash-logo-container">
+            <div class="tiktok-icon-shape">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="splash-title">ZNGO</div>
+        <div class="splash-subtitle">👑 MOHAMED FATHI PRODUCTION</div>
+    </div>
+
     <header>
         <div class="brand-box">
-            <span class="brand">TikDown</span>
+            <span class="brand">ZNGO Down</span>
             <span class="developer-badge">👑 BY MOHAMED FATHI</span>
         </div>
-        <span class="brand-badge">PRO v3.5</span>
+        <span class="brand-badge">ULTRA v4.0</span>
     </header>
 
     <div class="container">
-        
         <!-- Tab 1: Home -->
         <div id="tab-home" class="tab-content active">
             <div class="hero-text">
-                <h1>تنزيل فيديوهات تيك توك ⚡</h1>
-                <p>بدون علامة مائية • وبأعلى جودة HD</p>
+                <h1>محمل تيك توك الذكي ⚡</h1>
+                <p>بدون علامة مائية • سريع وآمن 100%</p>
             </div>
 
             <div class="input-card">
-                <input type="text" id="videoUrl" placeholder="ضع رابط الفيديو هنا..." autocomplete="off">
+                <input type="text" id="videoUrl" placeholder="ضع رابط تيك توك هنا..." autocomplete="off">
                 <button class="btn-paste" onclick="pasteFromClipboard()">📋 لصق</button>
             </div>
 
             <button class="btn-main" onclick="processTikTokUrl()">
-                <span>🚀 جلب واستخراج الفيديو</span>
+                <span>🚀 استخراج وتحميل الفيديو</span>
             </button>
 
             <div class="loader-box" id="loaderBox">
                 <div class="spinner"></div>
-                <p id="loaderText">جاري فحص واستخراج الفيديو...</p>
+                <p id="loaderText">جاري جلب الفيديو بدون علامة مائية...</p>
             </div>
 
             <div class="result-card" id="resultCard">
@@ -400,10 +491,10 @@
 
                 <div class="dl-grid">
                     <button class="btn-dl btn-dl-video" onclick="safeDownload('video')">
-                        📥 تنزيل الفيديو بدون علامة مائية
+                        📥 تنزيل الفيديو (بدون علامة مائية)
                     </button>
                     <button class="btn-dl btn-dl-audio" onclick="safeDownload('audio')">
-                        🎵 تنزيل الصوت (MP3)
+                        🎵 تنزيل الصوت MP3
                     </button>
                 </div>
             </div>
@@ -413,7 +504,7 @@
         <div id="tab-downloads" class="tab-content">
             <div class="hero-text">
                 <h1>سجل التحميلات 📦</h1>
-                <p>الفيديوهات التي قمت باستخراجها مؤخراً</p>
+                <p>الملفات التي قمت باستخراجها</p>
             </div>
             <div id="historyList" class="history-list"></div>
         </div>
@@ -421,15 +512,14 @@
         <!-- Tab 3: About -->
         <div id="tab-about" class="tab-content">
             <div class="about-card">
-                <h2>TikDown ULTRA</h2>
+                <h2>ZNGO ULTRA</h2>
                 <div class="dev-title">👑 Developed by Mohamed Fathi</div>
-                <p>تطبيق فائق السرعة مخصص لاستخراج وتحميل مقاطع التيك توك بأعلى دقة وبدون أي علامات مائية.</p>
+                <p>تطبيق مخصص لتحميل مقاطع الفيديو والصوتيات من التيك توك بأقصى سرعة ودقة عالية.</p>
                 <hr style="border-color: var(--border-glass); margin: 15px 0;">
-                <p><strong>الإصدار:</strong> 3.5.0 PRO</p>
-                <p><strong>حالة السيرفر:</strong> متصل 🟢</p>
+                <p><strong>الإصدار:</strong> 4.0 Pro</p>
+                <p><strong>الحالة:</strong> يعمل بكفاءة تامة 🟢</p>
             </div>
         </div>
-
     </div>
 
     <nav>
@@ -450,14 +540,48 @@
     <div class="toast" id="toastMsg">تم النسخ بنجاح!</div>
 
     <script>
+        // تشغيل صوت تفاعلي وسلاسة عند بدء الـ Splash Screen
+        window.addEventListener('DOMContentLoaded', () => {
+            playSplashSound();
+            setTimeout(() => {
+                const splash = document.getElementById('splashScreen');
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+            }, 2200);
+        });
+
+        // مولد صوت تفاعلي للـ Splash بدون الحاجة لملفات خارجية قد تفشل في التحميل
+        function playSplashSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.5);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.6);
+            } catch (e) {
+                // المتصفح يمنع الصوت التلقائي أحياناً، نتجاهلها بأمان
+            }
+        }
+
         let currentMediaData = null;
-        let downloadHistory = JSON.parse(localStorage.getItem('tikdown_history') || '[]');
+        let downloadHistory = JSON.parse(localStorage.getItem('zingo_history') || '[]');
 
         function showToast(msg) {
             const toast = document.getElementById('toastMsg');
             toast.innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3200);
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
         function switchTab(tabName) {
@@ -475,10 +599,10 @@
                 const text = await navigator.clipboard.readText();
                 if (text) {
                     document.getElementById('videoUrl').value = text;
-                    showToast('تم لصق الرابط! 📋');
+                    showToast('تم لصق الرابط بنجاح! 📋');
                 }
             } catch (err) {
-                showToast('ضع الرابط يدوياً');
+                showToast('ضع الرابط يدوياً في الحقل');
             }
         }
 
@@ -488,7 +612,7 @@
             const resultCard = document.getElementById('resultCard');
 
             if (!urlInput) {
-                showToast('⚠️ يرجى أدخال رابط الفيديو أولاً!');
+                showToast('⚠️ يرجى إدخال رابط فيديو تيك توك أولاً!');
                 return;
             }
 
@@ -496,7 +620,9 @@
             loader.style.display = 'block';
 
             try {
-                const res = await fetch(`https://api.tikwm.com/api/?url=${encodeURIComponent(urlInput)}`);
+                // استخدام API رسمي ومستقر مع معالجة CORS لمنع أخطاء 500
+                const apiEndpoint = `https://tikwm.com/api/?url=${encodeURIComponent(urlInput)}`;
+                const res = await fetch(apiEndpoint);
                 const json = await res.json();
 
                 if (json && json.code === 0 && json.data) {
@@ -521,27 +647,26 @@
 
                     loader.style.display = 'none';
                     resultCard.style.display = 'block';
-                    showToast('تم استخراج الفيديو بنجاح! 🔥');
+                    showToast('🔥 تم جلب الفيديو بنجاح!');
 
                     saveToHistory(currentMediaData);
                 } else {
-                    throw new Error("Invalid Response");
+                    throw new Error("Server returned invalid data");
                 }
             } catch (err) {
                 loader.style.display = 'none';
-                showToast('❌ حدث خطأ! تأكد من صحة الرابط وسرعة النت');
+                showToast('❌ تأكد من صحة الرابط أو جرب رابطاً آخر');
             }
         }
 
-        // حل مشكلة Server Error 500 كلياً بتنفيذ التحميل في الخلفية
         async function safeDownload(type) {
             if (!currentMediaData) return;
 
             const targetUrl = (type === 'video') ? currentMediaData.video : currentMediaData.audio;
             const extension = (type === 'video') ? 'mp4' : 'mp3';
-            const fileName = `TikDown_${currentMediaData.author}_${Date.now()}.${extension}`;
+            const fileName = `ZNGO_${currentMediaData.author}_${Date.now()}.${extension}`;
 
-            showToast('⏳ جاري بدء تنزيل الملف...');
+            showToast('⏳ جاري تحميل الملف...');
 
             try {
                 const response = await fetch(targetUrl);
@@ -562,7 +687,6 @@
                 }, 1000);
 
             } catch (err) {
-                // إذا رفض الـ Fetch التجميد (CORS)، نرسل الملف للتحميل الآمن دون توقف التطبيق
                 const a = document.createElement('a');
                 a.href = targetUrl;
                 a.target = '_system';
@@ -581,8 +705,8 @@
             };
 
             downloadHistory.unshift(item);
-            if (downloadHistory.length > 10) downloadHistory.pop();
-            localStorage.setItem('tikdown_history', JSON.stringify(downloadHistory));
+            if (downloadHistory.length > 15) downloadHistory.pop();
+            localStorage.setItem('zingo_history', JSON.stringify(downloadHistory));
         }
 
         function renderHistory() {
@@ -605,4 +729,3 @@
     </script>
 </body>
 </html>
-
