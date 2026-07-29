@@ -38,7 +38,7 @@
             overflow-x: hidden;
         }
 
-        /* Epic Splash Screen (حروف واقعة وتتجمع + لوجو متفتت) */
+        /* Splash Screen (6 ثواني - انسيابي وهادئ) */
         #splashScreen {
             position: fixed;
             top: 0;
@@ -51,78 +51,81 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
         .splash-assembly-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
 
-        /* Logo Shards Container */
-        .shards-logo {
+        /* تفكك وتجميع شعار تيك توك جزء بجزء */
+        .tiktok-shards-box {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
         }
 
-        .shard {
+        .t-shard {
             position: absolute;
+            width: 30px;
+            height: 30px;
             background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
-            border-radius: 8px;
-            animation: assembleShard 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            border-radius: 6px;
+            opacity: 0;
+            animation: assemblePiece 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        .shard-1 { width: 35px; height: 35px; top: 0; left: 0; animation-delay: 0.1s; transform: translate(-120px, -120px) rotate(-45deg); opacity: 0; }
-        .shard-2 { width: 35px; height: 35px; top: 0; right: 0; animation-delay: 0.25s; transform: translate(120px, -120px) rotate(45deg); opacity: 0; }
-        .shard-3 { width: 35px; height: 35px; bottom: 0; left: 0; animation-delay: 0.4s; transform: translate(-120px, 120px) rotate(90deg); opacity: 0; }
-        .shard-4 { width: 35px; height: 35px; bottom: 0; right: 0; animation-delay: 0.55s; transform: translate(120px, 120px) rotate(-90deg); opacity: 0; }
+        .t-shard-1 { top: 0; left: 0; transform: translate(-80px, -80px); animation-delay: 0.5s; }
+        .t-shard-2 { top: 0; right: 0; transform: translate(80px, -80px); animation-delay: 1.0s; }
+        .t-shard-3 { bottom: 0; left: 0; transform: translate(-80px, 80px); animation-delay: 1.5s; }
+        .t-shard-4 { bottom: 0; right: 0; transform: translate(80px, 80px); animation-delay: 2.0s; }
 
-        @keyframes assembleShard {
-            0% { transform: translate(var(--tx), var(--ty)) rotate(180deg); opacity: 0; }
-            100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+        @keyframes assemblePiece {
+            0% { transform: translate(var(--dx), var(--dy)) scale(0.3); opacity: 0; }
+            100% { transform: translate(0, 0) scale(1); opacity: 1; }
         }
 
-        /* Falling Letters ZNGO */
-        .falling-letters {
+        /* تجميع حروف ZNGO من تحت لفوق وبترتيب صحيح */
+        .letters-row {
             display: flex;
-            gap: 8px;
-            font-size: 3.2rem;
+            gap: 10px;
+            font-size: 3rem;
             font-weight: 900;
             letter-spacing: 2px;
+            direction: ltr;
         }
 
-        .letter {
+        .z-letter {
             display: inline-block;
             background: linear-gradient(45deg, #fff, var(--neon-cyan), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
-            animation: dropAndSlam 0.9s cubic-bezier(0.25, 1, 0.5, 1.2) forwards;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
             opacity: 0;
+            transform: translateY(100px);
+            animation: riseUpLetter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        .letter-1 { animation-delay: 0.3s; transform: translateY(-180px); }
-        .letter-2 { animation-delay: 0.5s; transform: translateY(-180px); }
-        .letter-3 { animation-delay: 0.7s; transform: translateY(-180px); }
-        .letter-4 { animation-delay: 0.9s; transform: translateY(-180px); }
+        .z-let-1 { animation-delay: 2.5s; }
+        .z-let-2 { animation-delay: 3.1s; }
+        .z-let-3 { animation-delay: 3.7s; }
+        .z-let-4 { animation-delay: 4.3s; }
 
-        @keyframes dropAndSlam {
-            0% { transform: translateY(-180px) scale(1.4); opacity: 0; }
-            70% { transform: translateY(15px) scale(0.9); opacity: 1; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
+        @keyframes riseUpLetter {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
 
         .splash-dev {
-            margin-top: 10px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--neon-gold);
             font-weight: 800;
             letter-spacing: 1px;
             opacity: 0;
-            animation: fadeInDev 0.5s ease 1.3s forwards;
+            animation: fadeInDev 1s ease 5s forwards;
         }
 
         @keyframes fadeInDev {
@@ -444,20 +447,20 @@
 </head>
 <body>
 
-    <!-- Splash Screen: حروف زنجو واقعة وتتجمع + لوجو تيك توك متفتت مركب مع أصوات تكسير وصدمات -->
+    <!-- Splash Screen (6 ثواني هادئة بأصوات احتكاك قديمة وتجميع الأجزاء والحروف الصحيحة ZNGO) -->
     <div id="splashScreen">
         <div class="splash-assembly-box">
-            <div class="shards-logo">
-                <div class="shard shard-1" style="--tx: -100px; --ty: -100px;"></div>
-                <div class="shard shard-2" style="--tx: 100px; --ty: -100px;"></div>
-                <div class="shard shard-3" style="--tx: -100px; --ty: 100px;"></div>
-                <div class="shard shard-4" style="--tx: 100px; --ty: 100px;"></div>
+            <div class="tiktok-shards-box">
+                <div class="t-shard t-shard-1" style="--dx: -70px; --dy: -70px;"></div>
+                <div class="t-shard t-shard-2" style="--dx: 70px; --dy: -70px;"></div>
+                <div class="t-shard t-shard-3" style="--dx: -70px; --dy: 70px;"></div>
+                <div class="t-shard t-shard-4" style="--dx: 70px; --dy: 70px;"></div>
             </div>
-            <div class="falling-letters">
-                <span class="letter letter-1">Z</span>
-                <span class="letter letter-2">N</span>
-                <span class="letter letter-3">G</span>
-                <span class="letter letter-4">O</span>
+            <div class="letters-row">
+                <span class="z-letter z-let-1">Z</span>
+                <span class="z-letter z-let-2">N</span>
+                <span class="z-letter z-let-3">G</span>
+                <span class="z-letter z-let-4">O</span>
             </div>
             <div class="splash-dev">👑 MOHAMED FATHI PRODUCTION</div>
         </div>
@@ -468,7 +471,7 @@
             <span class="brand">ZNGO Down</span>
             <span class="developer-badge">👑 BY MOHAMED FATHI</span>
         </div>
-        <span class="brand-badge">ULTRA v5.0</span>
+        <span class="brand-badge">ULTRA v5.1</span>
     </header>
 
     <div class="container">
@@ -533,7 +536,7 @@
                 <div class="dev-title">👑 Developed by Mohamed Fathi</div>
                 <p>تطبيق مخصص لتحميل مقاطع الفيديو والصوتيات من التيك توك بأقصى سرعة ودقة عالية.</p>
                 <hr style="border-color: var(--border-glass); margin: 15px 0;">
-                <p><strong>الإصدار:</strong> 5.0 Pro</p>
+                <p><strong>الإصدار:</strong> 5.1 Pro</p>
                 <p><strong>الحالة:</strong> يعمل بكفاءة تامة 🟢</p>
             </div>
         </div>
@@ -557,51 +560,51 @@
     <div class="toast" id="toastMsg">تم النسخ بنجاح!</div>
 
     <script>
-        // تشغيل نظام الصوت التفاعلي المتسلسل (أصوات تكسير واصطدام الحروف والأجزاء) عند فتح التطبيق
+        // تشغيل الأصوات الهادئة وأصوات الاحتكاك القديمة بشكل متسلسل خلال الـ 6 ثواني
         window.addEventListener('DOMContentLoaded', () => {
-            playSlamAndBreakSoundSequence();
+            playSoftOldMechanicalSoundSequence();
             setTimeout(() => {
                 const splash = document.getElementById('splashScreen');
                 splash.style.opacity = '0';
                 splash.style.visibility = 'hidden';
-            }, 2500);
+            }, 6000); // 6 ثواني كاملة
         });
 
-        function playSlamAndBreakSoundSequence() {
+        function playSoftOldMechanicalSoundSequence() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // صدمات تكسير أجزاء اللوجو المتفتت
-                [0.1, 0.25, 0.4, 0.55].forEach((delay, index) => {
+                // أصوات تركيب أجزاء تيك توك الهادئة
+                [0.5, 1.0, 1.5, 2.0].forEach((delay, index) => {
                     setTimeout(() => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
-                        osc.type = 'sawtooth';
-                        osc.frequency.setValueAtTime(150 + (index * 40), audioCtx.currentTime);
-                        osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.15);
-                        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-                        osc.connect(gain);
-                        gain.connect(audioCtx.destination);
-                        osc.start();
-                        osc.stop(audioCtx.currentTime + 0.15);
-                    }, delay * 1000);
-                });
-
-                // صوت ارتطام وسقوط حروف ZNGO وثباتها على الأرض بقوة
-                [0.8, 1.0, 1.2, 1.4].forEach((delay) => {
-                    setTimeout(() => {
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.type = 'triangle';
-                        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-                        osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.2);
-                        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(300 + (index * 50), audioCtx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+                        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
                         osc.start();
                         osc.stop(audioCtx.currentTime + 0.2);
+                    }, delay * 1000);
+                });
+
+                // أصوات احتكاك الحروف الصاعدة وصوت قديم هادئ
+                [2.5, 3.1, 3.7, 4.3].forEach((delay) => {
+                    setTimeout(() => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                        osc.frequency.exponentialRampToValueAtTime(90, audioCtx.currentTime + 0.3);
+                        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start();
+                        osc.stop(audioCtx.currentTime + 0.3);
                     }, delay * 1000);
                 });
             } catch (e) {}
@@ -691,7 +694,7 @@
             }
         }
 
-        /* الحل الجذري لمشكلة التحميل المباشر للهاتف بدون مربعات حوار مزعجة */
+        // التنزيل المباشر الصارم عبر الـ Blob لضمان الحفظ الفوري بالهاتف
         async function safeDownload(type) {
             if (!currentMediaData) return;
 
@@ -699,7 +702,7 @@
             const extension = (type === 'video') ? 'mp4' : 'mp3';
             const fileName = `ZNGO_${currentMediaData.author}_${Date.now()}.${extension}`;
 
-            showToast('⏳ جاري تنزيل الملف إلى هاتفك...');
+            showToast('⏳ جاري حفظ الملف على هاتفك...');
 
             try {
                 const response = await fetch(targetUrl, { mode: 'cors' });
@@ -716,11 +719,10 @@
                 setTimeout(() => {
                     window.URL.revokeObjectURL(blobUrl);
                     document.body.removeChild(a);
-                    showToast('✅ تم تنزيل الملف بنجاح في هاتفك!');
+                    showToast('✅ تم حفظ الملف في هاتفك بنجاح!');
                 }, 1000);
 
             } catch (err) {
-                // الطريقة البديلة المباشرة لضمان التنزيل الآمن
                 const a = document.createElement('a');
                 a.href = targetUrl;
                 a.setAttribute('download', fileName);
