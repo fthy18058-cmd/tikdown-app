@@ -2,20 +2,20 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikDown ULTRA - By Mohamed Fathi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikDown ULTRA - Mohamed Fathi</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #080911;
-            --bg-card: rgba(21, 25, 41, 0.8);
+            --bg-main: #090a14;
+            --bg-card: rgba(20, 24, 42, 0.85);
             --neon-pink: #ff0050;
             --neon-cyan: #00f2fe;
             --neon-purple: #7b2cbf;
             --neon-gold: #ffd700;
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --border-glass: rgba(255, 255, 255, 0.12);
         }
 
         * {
@@ -29,12 +29,12 @@
         body {
             background: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 80, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(255, 0, 80, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(0, 242, 254, 0.12) 0%, transparent 45%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
-            padding-bottom: 85px;
+            padding-bottom: 80px;
             overflow-x: hidden;
         }
 
@@ -42,8 +42,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: rgba(8, 9, 17, 0.9);
+            padding: 14px 18px;
+            background: rgba(9, 10, 20, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glass);
             position: sticky;
@@ -65,13 +65,11 @@
         }
 
         .developer-badge {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: var(--neon-gold);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
         .brand-badge {
@@ -81,7 +79,7 @@
             padding: 4px 10px;
             border-radius: 20px;
             font-weight: 800;
-            box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+            box-shadow: 0 0 12px rgba(255, 0, 80, 0.4);
         }
 
         .container {
@@ -100,7 +98,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -224,7 +222,7 @@
 
         .preview-wrapper video {
             width: 100%;
-            max-height: 340px;
+            max-height: 320px;
             display: block;
             object-fit: contain;
         }
@@ -241,18 +239,18 @@
             border-radius: 14px;
             border: none;
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            text-decoration: none;
         }
 
         .btn-dl-video {
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
         }
 
         .btn-dl-audio {
@@ -298,8 +296,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .about-card h2 { color: var(--neon-cyan); margin-bottom: 6px; font-size: 1.4rem; }
-        .dev-title { color: var(--neon-gold); font-weight: 800; font-size: 1.1rem; margin-bottom: 12px; }
+        .about-card h2 { color: var(--neon-cyan); margin-bottom: 6px; font-size: 1.4rem; font-weight: 900; }
+        .dev-title { color: var(--neon-gold); font-weight: 900; font-size: 1.15rem; margin-bottom: 12px; text-shadow: 0 0 10px rgba(255,215,0,0.3); }
         .about-card p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.6; }
 
         .toast {
@@ -330,7 +328,7 @@
             left: 0;
             right: 0;
             height: 65px;
-            background: rgba(8, 9, 17, 0.92);
+            background: rgba(9, 10, 20, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-glass);
             display: flex;
@@ -359,9 +357,9 @@
     <header>
         <div class="brand-box">
             <span class="brand">TikDown</span>
-            <span class="developer-badge">⚡ BY MOHAMED FATHI</span>
+            <span class="developer-badge">👑 BY MOHAMED FATHI</span>
         </div>
-        <span class="brand-badge">ULTRA v3.0</span>
+        <span class="brand-badge">PRO v3.5</span>
     </header>
 
     <div class="container">
@@ -369,8 +367,8 @@
         <!-- Tab 1: Home -->
         <div id="tab-home" class="tab-content active">
             <div class="hero-text">
-                <h1>تنزيل فيديوهات تيك توك 🚀</h1>
-                <p>بدون علامة مائية وبأعلى جودة HD</p>
+                <h1>تنزيل فيديوهات تيك توك ⚡</h1>
+                <p>بدون علامة مائية • وبأعلى جودة HD</p>
             </div>
 
             <div class="input-card">
@@ -379,12 +377,12 @@
             </div>
 
             <button class="btn-main" onclick="processTikTokUrl()">
-                <span>⚡ جلب واستخراج الفيديو</span>
+                <span>🚀 جلب واستخراج الفيديو</span>
             </button>
 
             <div class="loader-box" id="loaderBox">
                 <div class="spinner"></div>
-                <p id="loaderText">جاري الفحص وسحب الفيديو عبر السيرفر الفائق...</p>
+                <p id="loaderText">جاري فحص واستخراج الفيديو...</p>
             </div>
 
             <div class="result-card" id="resultCard">
@@ -401,12 +399,12 @@
                 </div>
 
                 <div class="dl-grid">
-                    <a id="btnVideoDl" class="btn-dl btn-dl-video" href="#" target="_blank" download>
+                    <button class="btn-dl btn-dl-video" onclick="safeDownload('video')">
                         📥 تنزيل الفيديو بدون علامة مائية
-                    </a>
-                    <a id="btnAudioDl" class="btn-dl btn-dl-audio" href="#" target="_blank" download>
+                    </button>
+                    <button class="btn-dl btn-dl-audio" onclick="safeDownload('audio')">
                         🎵 تنزيل الصوت (MP3)
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -427,8 +425,8 @@
                 <div class="dev-title">👑 Developed by Mohamed Fathi</div>
                 <p>تطبيق فائق السرعة مخصص لاستخراج وتحميل مقاطع التيك توك بأعلى دقة وبدون أي علامات مائية.</p>
                 <hr style="border-color: var(--border-glass); margin: 15px 0;">
-                <p><strong>الإصدار:</strong> 3.0.0 PRO</p>
-                <p><strong>حالة المحرك:</strong> متصل بالسيرفر المباشر 🟢</p>
+                <p><strong>الإصدار:</strong> 3.5.0 PRO</p>
+                <p><strong>حالة السيرفر:</strong> متصل 🟢</p>
             </div>
         </div>
 
@@ -452,13 +450,14 @@
     <div class="toast" id="toastMsg">تم النسخ بنجاح!</div>
 
     <script>
+        let currentMediaData = null;
         let downloadHistory = JSON.parse(localStorage.getItem('tikdown_history') || '[]');
 
         function showToast(msg) {
             const toast = document.getElementById('toastMsg');
             toast.innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 3200);
         }
 
         function switchTab(tabName) {
@@ -479,7 +478,7 @@
                     showToast('تم لصق الرابط! 📋');
                 }
             } catch (err) {
-                showToast('ضع الرابط يدوياً داخل الحقل');
+                showToast('ضع الرابط يدوياً');
             }
         }
 
@@ -489,101 +488,96 @@
             const resultCard = document.getElementById('resultCard');
 
             if (!urlInput) {
-                showToast('⚠️ يرجى وضع رابط الفيديو أولاً!');
+                showToast('⚠️ يرجى أدخال رابط الفيديو أولاً!');
                 return;
             }
 
             resultCard.style.display = 'none';
             loader.style.display = 'block';
 
-            // محاولة جلب الفيديو عبر سيرفرين متتاليين للتأكد من عدم الفشل
-            let success = await fetchPrimaryApi(urlInput);
-            
-            if (!success) {
-                success = await fetchSecondaryApi(urlInput);
-            }
-
-            loader.style.display = 'none';
-
-            if (!success) {
-                showToast('❌ تعذر جلب الفيديو! تأكد من أن الحساب ليس خاصاً');
-            }
-        }
-
-        // السيرفر الأساسي TikWM
-        async function fetchPrimaryApi(url) {
             try {
-                const res = await fetch(`https://api.tikwm.com/api/?url=${encodeURIComponent(url)}`);
+                const res = await fetch(`https://api.tikwm.com/api/?url=${encodeURIComponent(urlInput)}`);
                 const json = await res.json();
 
                 if (json && json.code === 0 && json.data) {
-                    displayResult({
-                        avatar: json.data.author.avatar,
-                        username: json.data.author.unique_id,
-                        nickname: json.data.author.nickname,
-                        videoUrl: json.data.play,
-                        audioUrl: json.data.music,
-                        cover: json.data.cover,
-                        title: json.data.title || 'فيديو تيك توك'
-                    });
-                    return true;
+                    const data = json.data;
+                    currentMediaData = {
+                        video: data.play,
+                        audio: data.music,
+                        title: data.title || 'video',
+                        author: data.author.unique_id,
+                        nickname: data.author.nickname,
+                        avatar: data.author.avatar,
+                        cover: data.cover
+                    };
+
+                    document.getElementById('authorAvatar').src = currentMediaData.avatar;
+                    document.getElementById('authorName').innerText = `@${currentMediaData.author}`;
+                    document.getElementById('authorNick').innerText = currentMediaData.nickname;
+
+                    const videoPlayer = document.getElementById('videoPreview');
+                    videoPlayer.src = currentMediaData.video;
+                    videoPlayer.poster = currentMediaData.cover;
+
+                    loader.style.display = 'none';
+                    resultCard.style.display = 'block';
+                    showToast('تم استخراج الفيديو بنجاح! 🔥');
+
+                    saveToHistory(currentMediaData);
+                } else {
+                    throw new Error("Invalid Response");
                 }
-            } catch (e) {
-                console.log("Primary API failed, trying backup...");
+            } catch (err) {
+                loader.style.display = 'none';
+                showToast('❌ حدث خطأ! تأكد من صحة الرابط وسرعة النت');
             }
-            return false;
         }
 
-        // السيرفر الاحتياطي Lovo
-        async function fetchSecondaryApi(url) {
+        // حل مشكلة Server Error 500 كلياً بتنفيذ التحميل في الخلفية
+        async function safeDownload(type) {
+            if (!currentMediaData) return;
+
+            const targetUrl = (type === 'video') ? currentMediaData.video : currentMediaData.audio;
+            const extension = (type === 'video') ? 'mp4' : 'mp3';
+            const fileName = `TikDown_${currentMediaData.author}_${Date.now()}.${extension}`;
+
+            showToast('⏳ جاري بدء تنزيل الملف...');
+
             try {
-                const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&web=1`);
-                const json = await res.json();
+                const response = await fetch(targetUrl);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
 
-                if (json && json.data) {
-                    displayResult({
-                        avatar: json.data.author.avatar,
-                        username: json.data.author.unique_id,
-                        nickname: json.data.author.nickname,
-                        videoUrl: json.data.play,
-                        audioUrl: json.data.music,
-                        cover: json.data.cover,
-                        title: json.data.title || 'فيديو تيك توك'
-                    });
-                    return true;
-                }
-            } catch (e) {
-                console.log("Backup API failed");
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = blobUrl;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(a);
+                    showToast('✅ تم التنزيل بنجاح!');
+                }, 1000);
+
+            } catch (err) {
+                // إذا رفض الـ Fetch التجميد (CORS)، نرسل الملف للتحميل الآمن دون توقف التطبيق
+                const a = document.createElement('a');
+                a.href = targetUrl;
+                a.target = '_system';
+                a.download = fileName;
+                a.click();
             }
-            return false;
-        }
-
-        function displayResult(data) {
-            document.getElementById('authorAvatar').src = data.avatar || '';
-            document.getElementById('authorName').innerText = `@${data.username}`;
-            document.getElementById('authorNick').innerText = data.nickname || '';
-
-            const videoPlayer = document.getElementById('videoPreview');
-            videoPlayer.src = data.videoUrl;
-            videoPlayer.poster = data.cover;
-
-            // ضبط أزرار التحميل
-            document.getElementById('btnVideoDl').href = data.videoUrl;
-            document.getElementById('btnAudioDl').href = data.audioUrl;
-
-            document.getElementById('resultCard').style.display = 'block';
-            showToast('تم استخراج الفيديو بنجاح! 🔥');
-
-            saveToHistory(data);
         }
 
         function saveToHistory(data) {
             const item = {
                 id: Date.now(),
                 title: data.title,
-                author: data.username,
+                author: data.author,
                 cover: data.cover,
-                play: data.videoUrl
+                play: data.video
             };
 
             downloadHistory.unshift(item);
@@ -603,7 +597,7 @@
                     <img src="${item.cover}" alt="cover">
                     <div class="history-details">
                         <h4>@${item.author}</h4>
-                        <p>${item.title.substring(0, 32)}...</p>
+                        <p>${item.title.substring(0, 30)}...</p>
                     </div>
                 </div>
             `).join('');
