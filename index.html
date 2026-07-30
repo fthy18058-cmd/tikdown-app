@@ -38,7 +38,7 @@
             overflow-x: hidden;
         }
 
-        /* Splash Screen (6 ثواني - انسيابي وهادئ) */
+        /* Splash Screen (6 ثواني هادئة بأصوات احتكاك قديمة وتجميع الأجزاء والحروف الصحيحة ZNGO) */
         #splashScreen {
             position: fixed;
             top: 0;
@@ -61,7 +61,6 @@
             gap: 24px;
         }
 
-        /* تفكك وتجميع شعار تيك توك جزء بجزء */
         .tiktok-shards-box {
             position: relative;
             width: 70px;
@@ -78,17 +77,16 @@
             animation: assemblePiece 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        .t-shard-1 { top: 0; left: 0; transform: translate(-80px, -80px); animation-delay: 0.5s; }
-        .t-shard-2 { top: 0; right: 0; transform: translate(80px, -80px); animation-delay: 1.0s; }
-        .t-shard-3 { bottom: 0; left: 0; transform: translate(-80px, 80px); animation-delay: 1.5s; }
-        .t-shard-4 { bottom: 0; right: 0; transform: translate(80px, 80px); animation-delay: 2.0s; }
+        .t-shard-1 { top: 0; left: 0; transform: translate(-70px, -70px); animation-delay: 0.5s; }
+        .t-shard-2 { top: 0; right: 0; transform: translate(70px, -70px); animation-delay: 1.0s; }
+        .t-shard-3 { bottom: 0; left: 0; transform: translate(-70px, 70px); animation-delay: 1.5s; }
+        .t-shard-4 { bottom: 0; right: 0; transform: translate(70px, 70px); animation-delay: 2.0s; }
 
         @keyframes assemblePiece {
             0% { transform: translate(var(--dx), var(--dy)) scale(0.3); opacity: 0; }
             100% { transform: translate(0, 0) scale(1); opacity: 1; }
         }
 
-        /* تجميع حروف ZNGO من تحت لفوق وبترتيب صحيح */
         .letters-row {
             display: flex;
             gap: 10px;
@@ -132,7 +130,6 @@
             to { opacity: 1; }
         }
 
-        /* Main UI */
         header {
             display: flex;
             align-items: center;
@@ -471,7 +468,7 @@
             <span class="brand">ZNGO Down</span>
             <span class="developer-badge">👑 BY MOHAMED FATHI</span>
         </div>
-        <span class="brand-badge">ULTRA v5.1</span>
+        <span class="brand-badge">ULTRA v5.2</span>
     </header>
 
     <div class="container">
@@ -536,7 +533,7 @@
                 <div class="dev-title">👑 Developed by Mohamed Fathi</div>
                 <p>تطبيق مخصص لتحميل مقاطع الفيديو والصوتيات من التيك توك بأقصى سرعة ودقة عالية.</p>
                 <hr style="border-color: var(--border-glass); margin: 15px 0;">
-                <p><strong>الإصدار:</strong> 5.1 Pro</p>
+                <p><strong>الإصدار:</strong> 5.2 Pro</p>
                 <p><strong>الحالة:</strong> يعمل بكفاءة تامة 🟢</p>
             </div>
         </div>
@@ -560,21 +557,19 @@
     <div class="toast" id="toastMsg">تم النسخ بنجاح!</div>
 
     <script>
-        // تشغيل الأصوات الهادئة وأصوات الاحتكاك القديمة بشكل متسلسل خلال الـ 6 ثواني
         window.addEventListener('DOMContentLoaded', () => {
             playSoftOldMechanicalSoundSequence();
             setTimeout(() => {
                 const splash = document.getElementById('splashScreen');
                 splash.style.opacity = '0';
                 splash.style.visibility = 'hidden';
-            }, 6000); // 6 ثواني كاملة
+            }, 6000);
         });
 
         function playSoftOldMechanicalSoundSequence() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // أصوات تركيب أجزاء تيك توك الهادئة
                 [0.5, 1.0, 1.5, 2.0].forEach((delay, index) => {
                     setTimeout(() => {
                         const osc = audioCtx.createOscillator();
@@ -591,7 +586,6 @@
                     }, delay * 1000);
                 });
 
-                // أصوات احتكاك الحروف الصاعدة وصوت قديم هادئ
                 [2.5, 3.1, 3.7, 4.3].forEach((delay) => {
                     setTimeout(() => {
                         const osc = audioCtx.createOscillator();
@@ -694,43 +688,25 @@
             }
         }
 
-        // التنزيل المباشر الصارم عبر الـ Blob لضمان الحفظ الفوري بالهاتف
-        async function safeDownload(type) {
+        /* الحل النهائي لتجاوز مربعات النظام واجبار المتصفح على بدء التحميل الخارجي */
+        function safeDownload(type) {
             if (!currentMediaData) return;
 
             const targetUrl = (type === 'video') ? currentMediaData.video : currentMediaData.audio;
-            const extension = (type === 'video') ? 'mp4' : 'mp3';
-            const fileName = `ZNGO_${currentMediaData.author}_${Date.now()}.${extension}`;
+            
+            showToast('🚀 يتم الآن فتح رابط التحميل المباشر...');
 
-            showToast('⏳ جاري حفظ الملف على هاتفك...');
-
-            try {
-                const response = await fetch(targetUrl, { mode: 'cors' });
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
-
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = blobUrl;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-
-                setTimeout(() => {
-                    window.URL.revokeObjectURL(blobUrl);
-                    document.body.removeChild(a);
-                    showToast('✅ تم حفظ الملف في هاتفك بنجاح!');
-                }, 1000);
-
-            } catch (err) {
+            // فتح الرابط في نافذة جديدة أو تبويب خارجي ليتولى المتصفح التحميل فوراً
+            setTimeout(() => {
+                window.open(targetUrl, '_system');
+                // احتياطي في حال عدم استجابة _system
                 const a = document.createElement('a');
                 a.href = targetUrl;
-                a.setAttribute('download', fileName);
+                a.target = '_blank';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                showToast('✅ تم بدء التحميل!');
-            }
+            }, 500);
         }
 
         function saveToHistory(data) {
@@ -767,3 +743,4 @@
     </script>
 </body>
 </html>
+
